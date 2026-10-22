@@ -53,8 +53,8 @@ async def get_developer_overview(username: str):
 @router.get("/{username}/repositories", response_model=List[RepositorySummary])
 async def get_developer_repositories(
     username: str,
-    sort: str = Query("updated", regex="^(updated|stars|forks|size|name)$"),
-    order: str = Query("desc", regex="^(asc|desc)$"),
+    sort: str = Query("updated", pattern="^(updated|stars|forks|size|name)$"),
+    order: str = Query("desc", pattern="^(asc|desc)$"),
     language: Optional[str] = None,
     include_forks: bool = True,
     limit: int = Query(100, ge=1, le=100)
