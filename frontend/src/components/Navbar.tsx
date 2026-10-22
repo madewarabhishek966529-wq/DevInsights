@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   BarChart3, Search, Sun, Moon, GitCompare, Camera, 
-  Download, Settings2, Github, Sparkles 
+  Download, Settings2
 } from 'lucide-react';
 
 interface NavbarProps {
