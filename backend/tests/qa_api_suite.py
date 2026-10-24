@@ -101,6 +101,29 @@ test_cases = [
     ("XSS in Snapshot Note", "/snapshots/torvalds", "POST", {"username": "torvalds", "note": "<script>alert('xss')</script>"}, 200),
     # Root / Unregistered Route
     ("Unregistered Route 404", "/developers/torvalds/nonexistent", "GET", None, 404),
+    # Repositories Endpoints
+    ("Repo Health", "/repositories/torvalds/linux/health", "GET", None, 200),
+    ("Repo Commits", "/repositories/torvalds/linux/commits?per_page=5", "GET", None, 200),
+    ("Repo Pulls", "/repositories/torvalds/linux/pulls?per_page=5", "GET", None, 200),
+    ("Repo Issues", "/repositories/torvalds/linux/issues?per_page=5", "GET", None, 200),
+    ("Repo Contributors", "/repositories/torvalds/linux/contributors?per_page=5", "GET", None, 200),
+    ("Repo Releases", "/repositories/torvalds/linux/releases?per_page=5", "GET", None, 200),
+    ("Repo Branches", "/repositories/torvalds/linux/branches?per_page=5", "GET", None, 200),
+    ("Repo Extended Detail", "/repositories/torvalds/linux", "GET", None, 200),
+    ("Repo Search", "/repositories/search?q=linux&per_page=5", "GET", None, 200),
+    ("Repo Compare", "/repositories/compare?repos=torvalds/linux,git/git", "GET", None, 200),
+    # Bookmarks Endpoints
+    ("List Bookmarks Initial", "/bookmarks", "GET", None, 200),
+    ("Create User Bookmark", "/bookmarks", "POST", {"item_type": "user", "identifier": "torvalds", "title": "Linus Torvalds"}, 200),
+    ("Create Repo Bookmark", "/bookmarks", "POST", {"item_type": "repo", "identifier": "torvalds/linux", "title": "Linux Kernel"}, 200),
+    ("List Bookmarks Filtered", "/bookmarks?item_type=repo", "GET", None, 200),
+    ("Delete Bookmark by Identifier", "/bookmarks/remove/repo/torvalds/linux", "DELETE", None, 200),
+    # GitHub Alias Endpoints
+    ("GitHub User Alias", "/github/users/torvalds", "GET", None, 200),
+    ("GitHub User Repos Alias", "/github/users/torvalds/repos?per_page=5", "GET", None, 200),
+    ("GitHub User Insights Alias", "/github/users/torvalds/insights", "GET", None, 200),
+    ("GitHub Repo Details Alias", "/github/repos/torvalds/linux", "GET", None, 200),
+    ("GitHub Search Users", "/github/search/users?q=torvalds&per_page=5", "GET", None, 200),
 ]
 
 results = []

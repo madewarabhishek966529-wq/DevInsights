@@ -11,6 +11,8 @@ from app.api.endpoints.compare import router as compare_router
 from app.api.endpoints.snapshots import router as snapshots_router
 from app.api.endpoints.preferences import router as preferences_router
 from app.api.endpoints.reports import router as reports_router
+from app.api.endpoints.bookmarks import router as bookmarks_router
+from app.api.endpoints.github import router as github_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -39,6 +41,8 @@ app.include_router(health_router, prefix="/api", tags=["System Health"])
 app.include_router(compare_router, prefix="/api/developers", tags=["Compare"])
 app.include_router(developers_router, prefix="/api/developers", tags=["Developers"])
 app.include_router(repositories_router, prefix="/api/repositories", tags=["Repositories"])
+app.include_router(bookmarks_router, prefix="/api/bookmarks", tags=["Bookmarks & Saved"])
+app.include_router(github_router, prefix="/api/github", tags=["GitHub Real API"])
 app.include_router(snapshots_router, prefix="/api/snapshots", tags=["Snapshots & Growth"])
 app.include_router(preferences_router, prefix="/api/preferences", tags=["Preferences & Layout"])
 app.include_router(reports_router, prefix="/api/reports", tags=["Reports & Export"])

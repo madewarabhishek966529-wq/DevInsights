@@ -98,6 +98,53 @@ class GitHubClient:
                 return []
             raise
 
+    async def get_repository_pulls(self, owner: str, repo: str, state: str = "all", per_page: int = 30) -> List[Dict[str, Any]]:
+        try:
+            return await self._fetch(f"/repos/{owner}/{repo}/pulls", params={"state": state, "per_page": per_page}, ttl=600)
+        except HTTPException as e:
+            if e.status_code in (404, 409):
+                return []
+            raise
+
+    async def get_repository_issues(self, owner: str, repo: str, state: str = "all", per_page: int = 30) -> List[Dict[str, Any]]:
+        try:
+            # GitHub issues endpoint includes pull requests; we will filter them in the caller if needed
+            return await self._fetch(f"/repos/{owner}/{repo}/issues", params={"state": state, "per_page": per_page}, ttl=600)
+        except HTTPException as e:
+            if e.status_code in (404, 409):
+                return []
+            raise
+
+    async def get_repository_contributors(self, owner: str, repo: str, per_page: int = 30) -> List[Dict[str, Any]]:
+        try:
+            return await self._fetch(f"/repos/{owner}/{repo}/contributors", params={"per_page": per_page}, ttl=1800)
+        except HTTPException as e:
+            if e.status_code in (404, 409):
+                return []
+            raise
+
+    async def get_repository_releases(self, owner: str, repo: str, per_page: int = 10) -> List[Dict[str, Any]]:
+        try:
+            return await self._fetch(f"/repos/{owner}/{repo}/releases", params={"per_page": per_page}, ttl=1800)
+        except HTTPException as e:
+            if e.status_code in (404, 409):
+                return []
+            raise
+
+    async def get_repository_branches(self, owner: str, repo: str, per_page: int = 30) -> List[Dict[str, Any]]:
+        try:
+            return await self._fetch(f"/repos/{owner}/{repo}/branches", params={"per_page": per_page}, ttl=1800)
+        except HTTPException as e:
+            if e.status_code in (404, 409):
+                return []
+            raise
+
+    async def search_repositories(self, query: str, sort: str = "stars", order: str = "desc", per_page: int = 30) -> Dict[str, Any]:
+        return await self._fetch("/search/repositories", params={"q": query, "sort": sort, "order": order, "per_page": per_page}, ttl=300)
+
+    async def search_users(self, query: str, per_page: int = 20) -> Dict[str, Any]:
+        return await self._fetch("/search/users", params={"q": query, "per_page": per_page}, ttl=300)
+
     async def get_rate_limit(self) -> Dict[str, Any]:
         try:
             async with httpx.AsyncClient(timeout=5.0) as client:

@@ -130,6 +130,11 @@ class SmartInsight(BaseModel):
     severity: str # "positive", "info", "warning"
     title: str
     description: str
+    observation: Optional[str] = None
+    supporting_metrics: Optional[str] = None
+    calculation_method: Optional[str] = None
+    period_analyzed: Optional[str] = None
+    data_limitations: Optional[str] = None
     metric_source: str
 
 class DeveloperComparison(BaseModel):
@@ -137,6 +142,117 @@ class DeveloperComparison(BaseModel):
     shared_languages: List[str]
     metrics_matrix: List[Dict[str, Any]]
     disclaimer: str = "Developer comparisons measure public repository counts, stars, forks, and detected languages. Metrics do not measure overall skill, code quality, or engineering competence."
+
+class CommitDetailItem(BaseModel):
+    sha: str
+    author_name: str
+    author_date: str
+    message: str
+    html_url: str
+
+class PullRequestDetailItem(BaseModel):
+    id: int
+    number: int
+    title: str
+    state: str
+    created_at: str
+    merged_at: Optional[str] = None
+    closed_at: Optional[str] = None
+    user_login: str
+    html_url: str
+
+class IssueDetailItem(BaseModel):
+    id: int
+    number: int
+    title: str
+    state: str
+    created_at: str
+    closed_at: Optional[str] = None
+    comments: int
+    user_login: str
+    html_url: str
+
+class ContributorDetailItem(BaseModel):
+    login: str
+    avatar_url: str
+    contributions: int
+    html_url: str
+
+class ReleaseDetailItem(BaseModel):
+    id: int
+    tag_name: str
+    name: Optional[str] = None
+    published_at: Optional[str] = None
+    html_url: str
+
+class BranchDetailItem(BaseModel):
+    name: str
+    protected: bool
+
+class RepositoryDetailExtended(BaseModel):
+    id: int
+    name: str
+    full_name: str
+    owner: str
+    description: Optional[str] = None
+    html_url: str
+    language: Optional[str] = None
+    stargazers_count: int
+    forks_count: int
+    open_issues_count: int
+    watchers_count: int
+    size_kb: int
+    default_branch: str
+    license_name: Optional[str] = None
+    created_at: str
+    updated_at: str
+    pushed_at: Optional[str] = None
+    topics: List[str] = []
+    health_score: float
+    languages_breakdown: Dict[str, int] = {}
+    recent_commits: List[CommitDetailItem] = []
+    recent_pulls: List[PullRequestDetailItem] = []
+    recent_issues: List[IssueDetailItem] = []
+    contributors: List[ContributorDetailItem] = []
+    releases: List[ReleaseDetailItem] = []
+    branches: List[BranchDetailItem] = []
+    disclaimer: str = "Repository data retrieved live from official GitHub REST API. Private repositories, team discussions, and restricted organization forks are excluded."
+
+class RepositoryComparisonItem(BaseModel):
+    name: str
+    full_name: str
+    stars: int
+    forks: int
+    open_issues: int
+    language: Optional[str] = None
+    health_score: float
+    size_kb: int
+    updated_at: str
+    pushed_at: Optional[str] = None
+    open_prs_count: int
+    closed_prs_count: int
+    recent_commit_count: int
+
+class RepositoryComparisonResponse(BaseModel):
+    repositories: List[RepositoryComparisonItem]
+    metrics_matrix: List[Dict[str, Any]]
+    disclaimer: str = "Repository comparison reflects publicly accessible GitHub metadata, commit activity, and pull request states. Periods with different commit cadences or different project lifecycles should be compared with contextual awareness."
+
+class BookmarkItem(BaseModel):
+    id: Optional[int] = None
+    item_type: str # "user" or "repo"
+    identifier: str # "torvalds" or "facebook/react"
+    title: str
+    subtitle: Optional[str] = None
+    avatar_url: Optional[str] = None
+    created_at: Optional[str] = None
+
+class BookmarkCreate(BaseModel):
+    item_type: str # "user" or "repo"
+    identifier: str # "torvalds" or "facebook/react"
+    title: str
+    subtitle: Optional[str] = None
+    avatar_url: Optional[str] = None
 
 class SnapshotCreate(BaseModel):
     username: str
