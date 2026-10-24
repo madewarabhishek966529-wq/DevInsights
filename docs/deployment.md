@@ -32,27 +32,7 @@ Visit `http://localhost:5173` to explore the dashboard.
 
 ---
 
-## 2. Docker Compose Deployment (Single Command)
-
-```bash
-# Clone and enter workspace
-git clone <repository_url>
-cd DevInsights
-
-# Optional: Add GitHub token to .env to raise rate limits
-cp .env.example .env
-
-# Build and start services
-docker-compose up --build -d
-```
-
-- **Frontend:** `http://localhost:3000`
-- **Backend API:** `http://localhost:8000`
-- **API Swagger Documentation:** `http://localhost:8000/docs`
-
----
-
-## 3. Production Cloud Hosting
+## 2. Production Cloud Hosting
 
 ### Frontend (Vercel / Netlify)
 1. Push repository to GitHub.
@@ -71,7 +51,7 @@ docker-compose up --build -d
 
 ---
 
-## 4. Troubleshooting & GitHub Rate Limits
+## 3. Troubleshooting & GitHub Rate Limits
 
 - **Unauthenticated limit:** GitHub allows 60 requests/hour per IP address.
 - **Authenticated limit:** Providing a classic personal access token (`GITHUB_TOKEN`) increases quota to 5,000 requests/hour.

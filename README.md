@@ -91,15 +91,12 @@ DevInsights is a modern, responsive, data-driven developer activity analytics an
 | **Backend** | Python 3.12, FastAPI, Pydantic v2, HTTPX, Pandas, SQLAlchemy 2.0 (Async), aiosqlite |
 | **Database** | SQLite (development/local) with support for PostgreSQL |
 | **Testing** | Pytest, Pytest-Asyncio, Vitest, React Testing Library, JSDOM |
-| **DevOps** | Docker, Docker Compose, Nginx |
 
 ---
 
 ## 🚀 Quick Start
 
-### Option A: Local Development
-
-#### 1. Start Backend API
+### 1. Start Backend API
 ```bash
 cd backend
 python -m venv venv
@@ -109,22 +106,13 @@ uvicorn app.main:app --port 8000 --reload
 ```
 API will run at `http://localhost:8000`. Interactive docs at `http://localhost:8000/docs`.
 
-#### 2. Start Frontend Client
+### 2. Start Frontend Client
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 Client will run at `http://localhost:5173`.
-
----
-
-### Option B: Docker Compose (One Command)
-```bash
-docker-compose up --build -d
-```
-- Frontend application: `http://localhost:3000`
-- Backend API: `http://localhost:8000`
 
 ---
 
