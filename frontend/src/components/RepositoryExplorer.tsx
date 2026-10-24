@@ -1,10 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import { RepositorySummary } from '../types/developer';
 import { RepositoryHealthModal } from './RepositoryHealthModal';
+import { RepositoryDetailModal } from './RepositoryDetailModal';
 import { 
   FolderGit2, Search, Star, GitFork, AlertCircle, 
   Clock, ShieldCheck, ExternalLink, ArrowUpDown, 
-  ChevronLeft, ChevronRight, Filter, Archive, GitBranch 
+  ChevronLeft, ChevronRight, Filter, Archive, GitBranch,
+  Layers
 } from 'lucide-react';
 
 interface RepositoryExplorerProps {
@@ -18,6 +20,7 @@ export const RepositoryExplorer: React.FC<RepositoryExplorerProps> = ({ reposito
   const [sortBy, setSortBy] = useState<'stars' | 'forks' | 'updated' | 'size' | 'name'>('stars');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [inspectRepo, setInspectRepo] = useState<RepositorySummary | null>(null);
+  const [detailRepo, setDetailRepo] = useState<RepositorySummary | null>(null);
 
   const itemsPerPage = 8;
 
@@ -218,7 +221,15 @@ export const RepositoryExplorer: React.FC<RepositoryExplorerProps> = ({ reposito
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      onClick={() => setDetailRepo(repo)}
+                      className="px-2 py-1 text-[11px] font-medium rounded-md bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 hover:bg-indigo-500/20 hover:text-white transition-colors flex items-center gap-1"
+                      title="Inspect commits, pulls, issues & contributors"
+                    >
+                      <Layers className="w-3 h-3 text-indigo-400" />
+                      <span>Telemetry</span>
+                    </button>
                     <button
                       onClick={() => setInspectRepo(repo)}
                       className="px-2 py-1 text-[11px] font-medium rounded-md bg-slate-900 border border-slate-800 hover:border-sky-500/50 hover:text-sky-400 transition-colors flex items-center gap-1"
@@ -265,6 +276,14 @@ export const RepositoryExplorer: React.FC<RepositoryExplorerProps> = ({ reposito
           repoName={inspectRepo.name}
           fullName={inspectRepo.full_name}
           onClose={() => setInspectRepo(null)}
+        />
+      )}
+
+      {/* Full Telemetry Repository Detail Modal */}
+      {detailRepo && (
+        <RepositoryDetailModal
+          fullName={detailRepo.full_name}
+          onClose={() => setDetailRepo(null)}
         />
       )}
     </div>

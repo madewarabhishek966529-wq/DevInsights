@@ -24,7 +24,7 @@ import {
   Star, GitFork, FolderGit2, Users, Code2, 
   ShieldCheck, MapPin, Building, Globe, 
   ExternalLink, RefreshCw, AlertCircle, Sparkles, 
-  Calendar, CheckCircle, Info 
+  Calendar, CheckCircle, Info, Bookmark, BookmarkCheck
 } from 'lucide-react';
 
 interface DashboardPageProps {
@@ -55,6 +55,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ theme, onToggleThe
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(false);
   const [dateFilter, setDateFilter] = useState<'all' | 'year' | '6m' | '30d'>('all');
   const [selectedHeatmapYear, setSelectedHeatmapYear] = useState<number>(new Date().getFullYear());
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
+  const [savingBookmark, setSavingBookmark] = useState<boolean>(false);
 
   // Modal dialog states
   const [showExportModal, setShowExportModal] = useState<boolean>(false);
@@ -115,6 +117,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ theme, onToggleThe
         setLayoutMode(prefRes.value.layout_mode);
       }
 
+      // Check bookmark status
+      try {
+        const bookmarks = await devApi.getBookmarks('user');
+        setIsBookmarked(bookmarks.some(b => b.identifier.toLowerCase() === cleanUsername.toLowerCase()));
+      } catch {
+        // ignore
+      }
+
     } catch (err: any) {
       setError(err.message || 'An error occurred while loading developer activity data.');
     } finally {
@@ -146,6 +156,30 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ theme, onToggleThe
   const handleUpdatePreferences = (widgets: string[], mode: string) => {
     setVisibleWidgets(widgets);
     setLayoutMode(mode);
+  };
+
+  const toggleProfileBookmark = async () => {
+    if (!overview || savingBookmark) return;
+    try {
+      setSavingBookmark(true);
+      if (isBookmarked) {
+        await devApi.deleteBookmarkByIdentifier('user', cleanUsername);
+        setIsBookmarked(false);
+      } else {
+        await devApi.createBookmark({
+          item_type: 'user',
+          identifier: cleanUsername,
+          title: overview.name || overview.username,
+          subtitle: overview.bio || undefined,
+          avatar_url: overview.avatar_url
+        });
+        setIsBookmarked(true);
+      }
+    } catch (err) {
+      console.error('Failed to toggle bookmark', err);
+    } finally {
+      setSavingBookmark(false);
+    }
   };
 
   return (
@@ -305,6 +339,29 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ theme, onToggleThe
                   {/* Top-Right Controls */}
                   <div className="flex flex-col sm:flex-row md:flex-col items-end gap-2 self-stretch md:self-auto justify-between">
                     <div className="flex items-center gap-2">
+                      <button
+                        onClick={toggleProfileBookmark}
+                        disabled={savingBookmark}
+                        className={`px-3 py-1.5 text-xs font-semibold rounded-lg border flex items-center gap-1.5 transition-all ${
+                          isBookmarked
+                            ? 'bg-amber-500/10 border-amber-500/30 text-amber-300 hover:bg-amber-500/20'
+                            : 'bg-slate-950 border-slate-800 text-slate-300 hover:text-white'
+                        }`}
+                        title="Save developer to Bookmarks"
+                      >
+                        {isBookmarked ? (
+                          <>
+                            <BookmarkCheck className="w-3.5 h-3.5 text-amber-400" />
+                            <span>Saved</span>
+                          </>
+                        ) : (
+                          <>
+                            <Bookmark className="w-3.5 h-3.5" />
+                            <span>Save Profile</span>
+                          </>
+                        )}
+                      </button>
+
                       <button
                         onClick={() => loadData(true)}
                         disabled={refreshing}

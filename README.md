@@ -24,11 +24,12 @@ DevInsights is a modern, responsive, data-driven developer activity analytics an
 - Precise byte-level code composition breakdown with color tagging.
 - Transparent disclaimer: *GitHub repository language statistics estimate code byte composition across repository default branches, not time spent programming or coding hours.*
 
-### 4. Searchable & Sortable Repository Explorer
+### 4. Searchable & Sortable Repository Explorer & Telemetry Modal
 - Search repositories by title, description, or keyword.
 - Filter by programming language, toggle upstream forks, and sort by *Stars*, *Forks*, *Recent Updates*, *Size*, or *Name*.
 - Repository health score tags (*0 to 100 with Letter Grades A+ to F*).
-- Drill-down modal for comprehensive repository diagnostic inspection.
+- **Interactive Telemetry Modal**: Live drill-down inspecting recent commits, pull requests, clean issues, top contributors, releases/tags, and active branches fetched live from GitHub REST API.
+- Save/Bookmark repository button directly from modal.
 
 ### 5. Commit & Activity Distribution Analytics
 - Day of week activity radar/bars (*Monday through Sunday*).
@@ -50,33 +51,42 @@ DevInsights is a modern, responsive, data-driven developer activity analytics an
 - Subscores for *Profile Completeness*, *Repository Hygiene*, and *Licensing*.
 - Categorized findings (*Pass*, *Warning*, *Fail*) and prioritized actionable checklist (*High*, *Medium*, *Low* priority).
 
-### 8. Deterministic Smart Insights
-- Natural-language pattern detection derived directly from calculated metrics:
+### 8. Deterministic Smart Insights with 5-Field Audit Trails
+- Natural-language pattern detection derived directly from calculated metrics without fabricated claims:
   - Flagship project star concentration
   - Polyglot vs single-language focus
-  - Dormant/stale repository warnings (>180 days inactive)
+  - Dormant/stale repository warnings (>90 & >180 days inactive)
+  - Issue backlog on inactive repositories
   - Weekend warrior vs structured weekday schedules
-  - Open-source licensing gaps
-- **100% deterministic:** Works without any paid AI API.
+  - Authorship vs fork ratio and open-source licensing hygiene
+- **Transparent Audit Trail**: Every insight displays:
+  - 🔍 **Observation** (Factual finding)
+  - 📊 **Supporting Metrics** (Exact numerical counts)
+  - 🧮 **Calculation Method** (Mathematical formula or filter)
+  - ⏱️ **Period Analyzed** (Explicit time window)
+  - ⚠️ **Data Limitations** (API boundaries and scope caveats)
 
-### 9. Developer Comparison Suite
-- Benchmark 2 to 4 public GitHub profiles side-by-side.
-- Comparative metrics matrix (*Stars, Forks, Repositories, Followers, Primary Language*).
-- Shared programming languages detection.
-- Visual comparative ratio bar chart.
+### 9. Side-by-Side Comparison Suite (Developers & Repositories)
+- **Developer Comparison**: Benchmark 2 to 4 public GitHub profiles side-by-side with metrics matrix and visual bar charts.
+- **Repository Comparison**: Benchmark 2 to 4 repositories comparing Stars, Forks, Open Issues, Health Scores, and Sampled Recent Commits.
 
-### 10. Growth Milestones & Snapshots
+### 10. Bookmarks & Saved Profiles / Repositories
+- Conveniently save GitHub usernames and repositories for instant future access.
+- Persisted in local database via `/api/bookmarks` REST endpoints.
+- Quick Bookmarks dropdown accessible from the navbar with single-click navigation and deletion.
+
+### 11. Growth Milestones & Snapshots
 - Capture metric snapshots into a local SQLite database.
 - Track progression over time with delta indicators ($\Delta$ stars, $\Delta$ repositories).
 - Add custom milestone notes.
 
-### 11. Multi-Format Data Export & PDF Reports
+### 12. Multi-Format Data Export & PDF Reports
 - Download filtered repository catalogs as formatted **CSV** spreadsheets.
 - Export comprehensive analytics summaries as **JSON**.
 - Generate print-ready **PDF** reports with clean print stylesheets.
 - One-click shareable profile URL copying.
 
-### 12. Personalized Dashboard & Themes
+### 13. Personalized Dashboard & Themes
 - Toggle visibility of individual dashboard modules.
 - Choose between **Comfort** (spacious) and **Compact** (high-density) layouts.
 - Sleek dark theme default with responsive light mode support.

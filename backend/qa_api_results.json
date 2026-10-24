@@ -6,7 +6,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 726.73,
+    "elapsed_ms": 488.0,
     "error": null
   },
   {
@@ -16,7 +16,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 1795.46,
+    "elapsed_ms": 1542.31,
     "error": null
   },
   {
@@ -26,7 +26,7 @@
     "status": 404,
     "expected": 404,
     "passed": true,
-    "elapsed_ms": 641.07,
+    "elapsed_ms": 644.89,
     "error": "{\"detail\":\"Requested GitHub resource '/users/nonexistent999999999' was not found.\"}"
   },
   {
@@ -36,7 +36,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 22.27,
+    "elapsed_ms": 13.86,
     "error": null
   },
   {
@@ -46,7 +46,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 27.41,
+    "elapsed_ms": 14.42,
     "error": null
   },
   {
@@ -56,7 +56,7 @@
     "status": 422,
     "expected": 422,
     "passed": true,
-    "elapsed_ms": 14.0,
+    "elapsed_ms": 15.25,
     "error": "{\"detail\":[{\"type\":\"string_pattern_mismatch\",\"loc\":[\"query\",\"sort\"],\"msg\":\"String should match patte"
   },
   {
@@ -66,7 +66,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 14.33,
+    "elapsed_ms": 16.29,
     "error": null
   },
   {
@@ -76,7 +76,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 955.26,
+    "elapsed_ms": 960.66,
     "error": null
   },
   {
@@ -86,7 +86,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 28.72,
+    "elapsed_ms": 27.08,
     "error": null
   },
   {
@@ -96,7 +96,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 2.09,
+    "elapsed_ms": 28.07,
     "error": null
   },
   {
@@ -106,7 +106,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 30.4,
+    "elapsed_ms": 17.4,
     "error": null
   },
   {
@@ -116,7 +116,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 1984.29,
+    "elapsed_ms": 2125.85,
     "error": null
   },
   {
@@ -126,7 +126,7 @@
     "status": 400,
     "expected": 400,
     "passed": true,
-    "elapsed_ms": 2.08,
+    "elapsed_ms": 12.04,
     "error": "{\"detail\":\"Please provide at least 2 GitHub usernames to compare.\"}"
   },
   {
@@ -136,7 +136,7 @@
     "status": 400,
     "expected": 400,
     "passed": true,
-    "elapsed_ms": 16.61,
+    "elapsed_ms": 15.51,
     "error": "{\"detail\":\"A maximum of 4 developers can be compared simultaneously.\"}"
   },
   {
@@ -146,7 +146,7 @@
     "status": 422,
     "expected": 422,
     "passed": true,
-    "elapsed_ms": 15.71,
+    "elapsed_ms": 15.34,
     "error": "{\"detail\":[{\"type\":\"missing\",\"loc\":[\"query\",\"usernames\"],\"msg\":\"Field required\",\"input\":null}]}"
   },
   {
@@ -156,7 +156,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 42.12,
+    "elapsed_ms": 25.5,
     "error": null
   },
   {
@@ -166,7 +166,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 28.92,
+    "elapsed_ms": 13.0,
     "error": null
   },
   {
@@ -176,7 +176,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 22.22,
+    "elapsed_ms": 25.04,
     "error": null
   },
   {
@@ -186,7 +186,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 19.87,
+    "elapsed_ms": 17.7,
     "error": null
   },
   {
@@ -196,7 +196,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 5.4,
+    "elapsed_ms": 30.06,
     "error": null
   },
   {
@@ -206,7 +206,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 25.26,
+    "elapsed_ms": 33.69,
     "error": null
   },
   {
@@ -216,7 +216,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 5.53,
+    "elapsed_ms": 6.0,
     "error": null
   },
   {
@@ -226,7 +226,7 @@
     "status": 404,
     "expected": 404,
     "passed": true,
-    "elapsed_ms": 647.38,
+    "elapsed_ms": 701.44,
     "error": "{\"detail\":\"Requested GitHub resource '/users/' OR 1=1--' was not found.\"}"
   },
   {
@@ -236,7 +236,7 @@
     "status": 404,
     "expected": 404,
     "passed": true,
-    "elapsed_ms": 25.63,
+    "elapsed_ms": 17.98,
     "error": "{\"detail\":\"Not Found\"}"
   },
   {
@@ -246,7 +246,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 24.77,
+    "elapsed_ms": 23.31,
     "error": null
   },
   {
@@ -256,7 +256,207 @@
     "status": 404,
     "expected": 404,
     "passed": true,
-    "elapsed_ms": 22.05,
+    "elapsed_ms": 1.0,
     "error": "{\"detail\":\"Not Found\"}"
+  },
+  {
+    "name": "Repo Health",
+    "path": "/repositories/torvalds/linux/health",
+    "method": "GET",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 690.37,
+    "error": null
+  },
+  {
+    "name": "Repo Commits",
+    "path": "/repositories/torvalds/linux/commits?per_page=5",
+    "method": "GET",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 1030.41,
+    "error": null
+  },
+  {
+    "name": "Repo Pulls",
+    "path": "/repositories/torvalds/linux/pulls?per_page=5",
+    "method": "GET",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 672.86,
+    "error": null
+  },
+  {
+    "name": "Repo Issues",
+    "path": "/repositories/torvalds/linux/issues?per_page=5",
+    "method": "GET",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 638.61,
+    "error": null
+  },
+  {
+    "name": "Repo Contributors",
+    "path": "/repositories/torvalds/linux/contributors?per_page=5",
+    "method": "GET",
+    "status": 429,
+    "expected": 200,
+    "passed": false,
+    "elapsed_ms": 787.32,
+    "error": "{\"detail\":\"GitHub API rate limit exceeded. Rate limit resets at 21:20:59 UTC. To increase limits to "
+  },
+  {
+    "name": "Repo Releases",
+    "path": "/repositories/torvalds/linux/releases?per_page=5",
+    "method": "GET",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 607.8,
+    "error": null
+  },
+  {
+    "name": "Repo Branches",
+    "path": "/repositories/torvalds/linux/branches?per_page=5",
+    "method": "GET",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 646.77,
+    "error": null
+  },
+  {
+    "name": "Repo Extended Detail",
+    "path": "/repositories/torvalds/linux",
+    "method": "GET",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 2278.89,
+    "error": null
+  },
+  {
+    "name": "Repo Search",
+    "path": "/repositories/search?q=linux&per_page=5",
+    "method": "GET",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 1425.79,
+    "error": null
+  },
+  {
+    "name": "Repo Compare",
+    "path": "/repositories/compare?repos=torvalds/linux,git/git",
+    "method": "GET",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 4417.98,
+    "error": null
+  },
+  {
+    "name": "List Bookmarks Initial",
+    "path": "/bookmarks",
+    "method": "GET",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 26.96,
+    "error": null
+  },
+  {
+    "name": "Create User Bookmark",
+    "path": "/bookmarks",
+    "method": "POST",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 24.28,
+    "error": null
+  },
+  {
+    "name": "Create Repo Bookmark",
+    "path": "/bookmarks",
+    "method": "POST",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 26.07,
+    "error": null
+  },
+  {
+    "name": "List Bookmarks Filtered",
+    "path": "/bookmarks?item_type=repo",
+    "method": "GET",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 26.08,
+    "error": null
+  },
+  {
+    "name": "Delete Bookmark by Identifier",
+    "path": "/bookmarks/remove/repo/torvalds/linux",
+    "method": "DELETE",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 20.87,
+    "error": null
+  },
+  {
+    "name": "GitHub User Alias",
+    "path": "/github/users/torvalds",
+    "method": "GET",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 1.98,
+    "error": null
+  },
+  {
+    "name": "GitHub User Repos Alias",
+    "path": "/github/users/torvalds/repos?per_page=5",
+    "method": "GET",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 830.39,
+    "error": null
+  },
+  {
+    "name": "GitHub User Insights Alias",
+    "path": "/github/users/torvalds/insights",
+    "method": "GET",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 19.71,
+    "error": null
+  },
+  {
+    "name": "GitHub Repo Details Alias",
+    "path": "/github/repos/torvalds/linux",
+    "method": "GET",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 26.51,
+    "error": null
+  },
+  {
+    "name": "GitHub Search Users",
+    "path": "/github/search/users?q=torvalds&per_page=5",
+    "method": "GET",
+    "status": 200,
+    "expected": 200,
+    "passed": true,
+    "elapsed_ms": 697.11,
+    "error": null
   }
 ]

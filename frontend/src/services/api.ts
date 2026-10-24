@@ -2,7 +2,10 @@ import {
   DeveloperOverview, RepositorySummary, LanguageAnalytics,
   ContributionData, ActivityAnalytics, PortfolioAuditResult,
   SmartInsight, DeveloperComparison, SnapshotResponse,
-  UserPreferenceResponse
+  UserPreferenceResponse, RepositoryDetailExtended,
+  CommitDetailItem, PullRequestDetailItem, IssueDetailItem,
+  ContributorDetailItem, ReleaseDetailItem, BranchDetailItem,
+  RepositoryComparisonResponse, BookmarkItem
 } from '../types/developer';
 
 const API_BASE = '/api';
@@ -86,9 +89,79 @@ export const devApi = {
     return handleResponse<any>(res);
   },
 
+  async getRepositoryExtended(owner: string, repo: string): Promise<RepositoryDetailExtended> {
+    const res = await fetch(`${API_BASE}/repositories/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`);
+    return handleResponse<RepositoryDetailExtended>(res);
+  },
+
+  async getRepositoryCommits(owner: string, repo: string, perPage: number = 20): Promise<CommitDetailItem[]> {
+    const res = await fetch(`${API_BASE}/repositories/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/commits?per_page=${perPage}`);
+    return handleResponse<CommitDetailItem[]>(res);
+  },
+
+  async getRepositoryPulls(owner: string, repo: string, state: string = 'all'): Promise<PullRequestDetailItem[]> {
+    const res = await fetch(`${API_BASE}/repositories/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/pulls?state=${state}`);
+    return handleResponse<PullRequestDetailItem[]>(res);
+  },
+
+  async getRepositoryIssues(owner: string, repo: string, state: string = 'all'): Promise<IssueDetailItem[]> {
+    const res = await fetch(`${API_BASE}/repositories/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/issues?state=${state}`);
+    return handleResponse<IssueDetailItem[]>(res);
+  },
+
+  async getRepositoryContributors(owner: string, repo: string): Promise<ContributorDetailItem[]> {
+    const res = await fetch(`${API_BASE}/repositories/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contributors`);
+    return handleResponse<ContributorDetailItem[]>(res);
+  },
+
+  async getRepositoryReleases(owner: string, repo: string): Promise<ReleaseDetailItem[]> {
+    const res = await fetch(`${API_BASE}/repositories/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/releases`);
+    return handleResponse<ReleaseDetailItem[]>(res);
+  },
+
+  async getRepositoryBranches(owner: string, repo: string): Promise<BranchDetailItem[]> {
+    const res = await fetch(`${API_BASE}/repositories/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/branches`);
+    return handleResponse<BranchDetailItem[]>(res);
+  },
+
+  async searchRepositories(query: string, sort: string = 'stars', order: string = 'desc'): Promise<any> {
+    const res = await fetch(`${API_BASE}/repositories/search?q=${encodeURIComponent(query)}&sort=${sort}&order=${order}`);
+    return handleResponse<any>(res);
+  },
+
   async compareDevelopers(usernames: string[]): Promise<DeveloperComparison> {
     const res = await fetch(`${API_BASE}/developers/compare?usernames=${encodeURIComponent(usernames.join(','))}`);
     return handleResponse<DeveloperComparison>(res);
+  },
+
+  async compareRepositories(repos: string[]): Promise<RepositoryComparisonResponse> {
+    const res = await fetch(`${API_BASE}/repositories/compare?repos=${encodeURIComponent(repos.join(','))}`);
+    return handleResponse<RepositoryComparisonResponse>(res);
+  },
+
+  async getBookmarks(itemType?: string): Promise<BookmarkItem[]> {
+    const url = itemType ? `${API_BASE}/bookmarks?item_type=${encodeURIComponent(itemType)}` : `${API_BASE}/bookmarks`;
+    const res = await fetch(url);
+    return handleResponse<BookmarkItem[]>(res);
+  },
+
+  async createBookmark(item: { item_type: 'user' | 'repo'; identifier: string; title: string; subtitle?: string; avatar_url?: string }): Promise<BookmarkItem> {
+    const res = await fetch(`${API_BASE}/bookmarks`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(item)
+    });
+    return handleResponse<BookmarkItem>(res);
+  },
+
+  async deleteBookmark(bookmarkId: number): Promise<any> {
+    const res = await fetch(`${API_BASE}/bookmarks/${bookmarkId}`, { method: 'DELETE' });
+    return handleResponse<any>(res);
+  },
+
+  async deleteBookmarkByIdentifier(itemType: 'user' | 'repo', identifier: string): Promise<any> {
+    const res = await fetch(`${API_BASE}/bookmarks/remove/${itemType}/${encodeURIComponent(identifier)}`, { method: 'DELETE' });
+    return handleResponse<any>(res);
   },
 
   async getSnapshots(username: string): Promise<SnapshotResponse[]> {

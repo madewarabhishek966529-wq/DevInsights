@@ -137,6 +137,11 @@ export interface SmartInsight {
   severity: 'positive' | 'info' | 'warning';
   title: string;
   description: string;
+  observation?: string | null;
+  supporting_metrics?: string | null;
+  calculation_method?: string | null;
+  period_analyzed?: string | null;
+  data_limitations?: string | null;
   metric_source: string;
 }
 
@@ -145,6 +150,122 @@ export interface DeveloperComparison {
   shared_languages: string[];
   metrics_matrix: Array<Record<string, any>>;
   disclaimer: string;
+}
+
+export interface CommitDetailItem {
+  sha: string;
+  author_name: string;
+  author_date: string;
+  message: string;
+  html_url: string;
+}
+
+export interface PullRequestDetailItem {
+  id: number;
+  number: number;
+  title: string;
+  state: string;
+  created_at: string;
+  merged_at?: string | null;
+  closed_at?: string | null;
+  html_url: string;
+  user_login?: string;
+}
+
+export interface IssueDetailItem {
+  id: number;
+  number: number;
+  title: string;
+  state: string;
+  created_at: string;
+  closed_at?: string | null;
+  comments_count: number;
+  html_url: string;
+  user_login?: string;
+}
+
+export interface ContributorDetailItem {
+  login: string;
+  avatar_url: string;
+  contributions: number;
+  html_url: string;
+}
+
+export interface ReleaseDetailItem {
+  id: number;
+  tag_name: string;
+  name?: string | null;
+  published_at?: string | null;
+  prerelease: boolean;
+  html_url: string;
+}
+
+export interface BranchDetailItem {
+  name: string;
+  commit_sha: string;
+  protected: boolean;
+}
+
+export interface RepositoryDetailExtended {
+  id: number;
+  name: string;
+  full_name: string;
+  owner: string;
+  description?: string | null;
+  html_url: string;
+  language?: string | null;
+  stargazers_count: number;
+  forks_count: number;
+  open_issues_count: number;
+  watchers_count: number;
+  size_kb: number;
+  default_branch: string;
+  license_name?: string | null;
+  created_at: string;
+  updated_at: string;
+  pushed_at?: string | null;
+  topics: string[];
+  health_score: number;
+  languages_breakdown: Record<string, number>;
+  recent_commits: CommitDetailItem[];
+  recent_pulls: PullRequestDetailItem[];
+  recent_issues: IssueDetailItem[];
+  contributors: ContributorDetailItem[];
+  releases: ReleaseDetailItem[];
+  branches: BranchDetailItem[];
+  disclaimer: string;
+}
+
+export interface RepositoryComparisonItem {
+  name: string;
+  full_name: string;
+  stars: number;
+  forks: number;
+  open_issues: number;
+  language?: string | null;
+  health_score: number;
+  size_kb: number;
+  updated_at: string;
+  pushed_at?: string | null;
+  open_prs_count: number;
+  closed_prs_count: number;
+  recent_commit_count: number;
+}
+
+export interface RepositoryComparisonResponse {
+  repositories: RepositoryComparisonItem[];
+  metrics_matrix: Array<Record<string, any>>;
+  disclaimer: string;
+}
+
+export interface BookmarkItem {
+  id?: number | null;
+  item_type: 'user' | 'repo';
+  identifier: string;
+  title: string;
+  subtitle?: string | null;
+  avatar_url?: string | null;
+  created_at?: string | null;
 }
 
 export interface SnapshotResponse {

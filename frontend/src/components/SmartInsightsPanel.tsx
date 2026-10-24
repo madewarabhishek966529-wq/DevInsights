@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SmartInsight } from '../types/developer';
-import { Sparkles, TrendingUp, AlertTriangle, Info, CheckCircle2, Lightbulb } from 'lucide-react';
+import { Sparkles, AlertTriangle, CheckCircle2, Lightbulb, ChevronDown, ChevronUp, ShieldCheck, Calculator, Clock, AlertCircle } from 'lucide-react';
 
 interface SmartInsightsPanelProps {
   insights: SmartInsight[];
 }
 
 export const SmartInsightsPanel: React.FC<SmartInsightsPanelProps> = ({ insights }) => {
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  const toggleExpand = (id: string) => {
+    setExpandedId(prev => (prev === id ? null : id));
+  };
+
   const getSeverityBadge = (severity: 'positive' | 'info' | 'warning') => {
     switch (severity) {
       case 'positive':
@@ -42,12 +48,16 @@ export const SmartInsightsPanel: React.FC<SmartInsightsPanelProps> = ({ insights
           <Sparkles className="w-5 h-5 text-amber-400" />
           <div>
             <h2 className="text-lg font-bold text-white tracking-tight">
-              Deterministic Smart Insights
+              Deterministic Insights Engine
             </h2>
             <p className="text-xs text-slate-400 mt-0.5">
-              Automated pattern detection derived directly from code repositories and activity metrics
+              Transparent, algorithmic observations with complete mathematical audit trails and data limitations
             </p>
           </div>
+        </div>
+        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/80 border border-slate-700/60 text-[11px] text-slate-300">
+          <ShieldCheck className="w-3.5 h-3.5 text-indigo-400" />
+          <span>Zero Fabricated Claims</span>
         </div>
       </div>
 
@@ -60,6 +70,8 @@ export const SmartInsightsPanel: React.FC<SmartInsightsPanelProps> = ({ insights
         ) : (
           insights.map((insight) => {
             const config = getSeverityBadge(insight.severity);
+            const isExpanded = expandedId === insight.id;
+
             return (
               <div
                 key={insight.id}
@@ -71,6 +83,14 @@ export const SmartInsightsPanel: React.FC<SmartInsightsPanelProps> = ({ insights
                       {config.icon}
                       {config.badgeText}
                     </span>
+                    <button
+                      type="button"
+                      onClick={() => toggleExpand(insight.id)}
+                      className="text-[11px] text-indigo-400 hover:text-indigo-300 flex items-center gap-1 transition-colors"
+                    >
+                      <span>{isExpanded ? 'Hide Audit' : 'Audit Trail'}</span>
+                      {isExpanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                    </button>
                   </div>
 
                   <h3 className="text-sm font-bold text-white mt-1">
@@ -80,6 +100,59 @@ export const SmartInsightsPanel: React.FC<SmartInsightsPanelProps> = ({ insights
                     {insight.description}
                   </p>
                 </div>
+
+                {/* Audit Trail Breakdown (5 mandatory audit fields) */}
+                {isExpanded && (
+                  <div className="mt-4 pt-3 border-t border-slate-800/80 space-y-2.5 bg-slate-950/60 p-3 rounded-lg text-xs">
+                    {insight.observation && (
+                      <div>
+                        <span className="text-slate-400 font-semibold block text-[10px] uppercase tracking-wider mb-0.5">Observation</span>
+                        <p className="text-slate-200">{insight.observation}</p>
+                      </div>
+                    )}
+
+                    {insight.supporting_metrics && (
+                      <div>
+                        <span className="text-slate-400 font-semibold block text-[10px] uppercase tracking-wider mb-0.5">Supporting Metrics</span>
+                        <p className="text-indigo-300 font-mono text-[11px]">{insight.supporting_metrics}</p>
+                      </div>
+                    )}
+
+                    {insight.calculation_method && (
+                      <div>
+                        <span className="text-slate-400 font-semibold flex items-center gap-1 text-[10px] uppercase tracking-wider mb-0.5">
+                          <Calculator className="w-3 h-3 text-emerald-400" />
+                          Calculation Method
+                        </span>
+                        <p className="text-slate-300 font-mono text-[11px] bg-slate-900/90 px-2 py-1 rounded border border-slate-800">
+                          {insight.calculation_method}
+                        </p>
+                      </div>
+                    )}
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                      {insight.period_analyzed && (
+                        <div>
+                          <span className="text-slate-400 font-semibold flex items-center gap-1 text-[10px] uppercase tracking-wider mb-0.5">
+                            <Clock className="w-3 h-3 text-sky-400" />
+                            Period Analyzed
+                          </span>
+                          <p className="text-slate-300 text-[11px]">{insight.period_analyzed}</p>
+                        </div>
+                      )}
+
+                      {insight.data_limitations && (
+                        <div>
+                          <span className="text-amber-400/90 font-semibold flex items-center gap-1 text-[10px] uppercase tracking-wider mb-0.5">
+                            <AlertCircle className="w-3 h-3 text-amber-400" />
+                            Data Limitations
+                          </span>
+                          <p className="text-slate-400 text-[11px] leading-tight">{insight.data_limitations}</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
 
                 {/* Source Citation */}
                 <div className="mt-4 pt-2.5 border-t border-slate-800/60 flex items-center justify-between text-[11px] text-slate-400">
