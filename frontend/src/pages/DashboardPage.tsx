@@ -34,6 +34,7 @@ interface DashboardPageProps {
 
 export const DashboardPage: React.FC<DashboardPageProps> = ({ theme, onToggleTheme }) => {
   const { username = 'torvalds' } = useParams<{ username: string }>();
+  const cleanUsername = (username ? username.trim().replace(/^@/, '') : '') || 'torvalds';
   const navigate = useNavigate();
 
   // Data states
@@ -66,7 +67,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ theme, onToggleThe
   const [layoutMode, setLayoutMode] = useState<string>('comfort');
 
   const loadData = useCallback(async (isRefresh = false) => {
-    if (!username) return;
+    if (!cleanUsername) return;
     if (isRefresh) setRefreshing(true);
     else setLoading(true);
     setError(null);
@@ -84,14 +85,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ theme, onToggleThe
         snapshotsRes,
         prefRes
       ] = await Promise.allSettled([
-        devApi.getOverview(username),
-        devApi.getRepositories(username),
-        devApi.getLanguages(username),
-        devApi.getActivity(username),
-        devApi.getContributions(username, selectedHeatmapYear),
-        devApi.getPortfolioAudit(username),
-        devApi.getInsights(username),
-        devApi.getSnapshots(username),
+        devApi.getOverview(cleanUsername),
+        devApi.getRepositories(cleanUsername),
+        devApi.getLanguages(cleanUsername),
+        devApi.getActivity(cleanUsername),
+        devApi.getContributions(cleanUsername, selectedHeatmapYear),
+        devApi.getPortfolioAudit(cleanUsername),
+        devApi.getInsights(cleanUsername),
+        devApi.getSnapshots(cleanUsername),
         devApi.getPreferences()
       ]);
 
@@ -99,7 +100,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ theme, onToggleThe
         setOverview(overviewRes.value);
       } else {
         const reason: any = overviewRes.reason;
-        throw new Error(reason?.message || `Developer '${username}' could not be found.`);
+        throw new Error(reason?.message || `Developer '${cleanUsername}' could not be found.`);
       }
 
       if (reposRes.status === 'fulfilled') setRepositories(reposRes.value);
@@ -120,7 +121,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ theme, onToggleThe
       setLoading(false);
       setRefreshing(false);
     }
-  }, [username, selectedHeatmapYear]);
+  }, [cleanUsername, selectedHeatmapYear]);
 
   useEffect(() => {
     loadData();
@@ -150,7 +151,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ theme, onToggleThe
   return (
     <div className="flex-1 flex flex-col min-h-screen bg-slate-950 text-slate-100">
       <Navbar
-        currentUsername={username}
+        currentUsername={cleanUsername}
         theme={theme}
         onToggleTheme={onToggleTheme}
         onOpenSnapshot={() => {

@@ -27,6 +27,7 @@ export function App() {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/dashboard" element={<Navigate to="/dashboard/torvalds" replace />} />
         <Route
           path="/dashboard/:username"
           element={<DashboardPage theme={theme} onToggleTheme={toggleTheme} />}

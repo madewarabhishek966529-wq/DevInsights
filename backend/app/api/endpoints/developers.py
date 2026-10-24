@@ -12,8 +12,20 @@ from app.analytics.insights_engine import generate_smart_insights
 
 router = APIRouter()
 
+def clean_username(username: str) -> str:
+    cleaned = username.strip().lstrip("@")
+    if not cleaned:
+        raise HTTPException(status_code=400, detail="Username cannot be empty.")
+    return cleaned
+
+@router.get("/{username}", response_model=DeveloperOverview, include_in_schema=False)
+async def get_developer_root(username: str):
+    """Direct alias so /api/developers/{username} returns overview."""
+    return await get_developer_overview(username)
+
 @router.get("/{username}/overview", response_model=DeveloperOverview)
 async def get_developer_overview(username: str):
+    username = clean_username(username)
     user_data = await github_client.get_user_profile(username)
     repos = await github_client.get_user_repositories(username)
     
@@ -59,6 +71,7 @@ async def get_developer_repositories(
     include_forks: bool = True,
     limit: int = Query(100, ge=1, le=100)
 ):
+    username = clean_username(username)
     repos = await github_client.get_user_repositories(username, sort="updated", per_page=100)
     
     filtered_repos = []
@@ -110,6 +123,7 @@ async def get_developer_repositories(
 
 @router.get("/{username}/languages", response_model=LanguageAnalytics)
 async def get_developer_languages(username: str):
+    username = clean_username(username)
     repos = await github_client.get_user_repositories(username)
     stats = process_languages(repos)
     total_bytes = sum(s.bytes for s in stats)
@@ -122,11 +136,13 @@ async def get_developer_languages(username: str):
 
 @router.get("/{username}/activity", response_model=ActivityAnalytics)
 async def get_developer_activity(username: str):
+    username = clean_username(username)
     events = await github_client.get_user_events(username, per_page=100)
     return process_activity_events(events)
 
 @router.get("/{username}/contributions", response_model=ContributionData)
 async def get_developer_contributions(username: str, year: Optional[int] = None):
+    username = clean_username(username)
     # Try GraphQL first if token exists
     gql_cal = await github_client.get_user_contributions_graphql(username)
     events = await github_client.get_user_events(username, per_page=100)
@@ -136,12 +152,14 @@ async def get_developer_contributions(username: str, year: Optional[int] = None)
 
 @router.get("/{username}/portfolio-audit", response_model=PortfolioAuditResult)
 async def get_developer_portfolio_audit(username: str):
+    username = clean_username(username)
     user_data = await github_client.get_user_profile(username)
     repos = await github_client.get_user_repositories(username)
     return run_portfolio_audit(user_data, repos)
 
 @router.get("/{username}/insights", response_model=List[SmartInsight])
 async def get_developer_insights(username: str):
+    username = clean_username(username)
     user_data = await github_client.get_user_profile(username)
     repos = await github_client.get_user_repositories(username)
     lang_stats = [l.model_dump() for l in process_languages(repos)]

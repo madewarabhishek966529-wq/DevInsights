@@ -19,8 +19,9 @@ export const LandingPage: React.FC = () => {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username.trim()) {
-      navigate(`/dashboard/${encodeURIComponent(username.trim())}`);
+    const clean = username.trim().replace(/^@/, '');
+    if (clean) {
+      navigate(`/dashboard/${encodeURIComponent(clean)}`);
     }
   };
 

@@ -27,8 +27,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchInput.trim()) {
-      navigate(`/dashboard/${encodeURIComponent(searchInput.trim())}`);
+    const clean = searchInput.trim().replace(/^@/, '');
+    if (clean) {
+      navigate(`/dashboard/${encodeURIComponent(clean)}`);
       setSearchInput('');
     }
   };
