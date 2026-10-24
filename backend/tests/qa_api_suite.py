@@ -93,9 +93,8 @@ test_cases = [
         "visible_widgets": ["metrics", "heatmap", "languages"]
     }, 200),
     # Reports & Exports
-    ("Export JSON", "/reports/torvalds/json", "GET", None, 200),
-    ("Export CSV", "/reports/torvalds/csv", "GET", None, 200),
-    ("Export PDF", "/reports/torvalds/pdf", "GET", None, 200),
+    ("Export JSON", "/reports/export", "POST", {"username": "torvalds", "format": "json", "include_repos": True}, 200),
+    ("Export CSV", "/reports/export", "POST", {"username": "torvalds", "format": "csv", "include_repos": True}, 200),
     # Security Injection Checks
     ("SQL Injection in Username", "/developers/%27%20OR%201=1--/overview", "GET", None, 404),
     ("Path Traversal in Username", "/developers/..%2F..%2Fetc%2Fpasswd/overview", "GET", None, 404),

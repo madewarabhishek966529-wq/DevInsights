@@ -6,7 +6,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 559.08,
+    "elapsed_ms": 384.56,
     "error": null
   },
   {
@@ -16,7 +16,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 1474.78,
+    "elapsed_ms": 2.89,
     "error": null
   },
   {
@@ -26,7 +26,7 @@
     "status": 404,
     "expected": 404,
     "passed": true,
-    "elapsed_ms": 577.38,
+    "elapsed_ms": 543.38,
     "error": "{\"detail\":\"Requested GitHub resource '/users/nonexistent999999999' was not found.\"}"
   },
   {
@@ -36,7 +36,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 12.55,
+    "elapsed_ms": 23.72,
     "error": null
   },
   {
@@ -46,7 +46,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 16.67,
+    "elapsed_ms": 14.81,
     "error": null
   },
   {
@@ -56,7 +56,7 @@
     "status": 422,
     "expected": 422,
     "passed": true,
-    "elapsed_ms": 3.34,
+    "elapsed_ms": 15.19,
     "error": "{\"detail\":[{\"type\":\"string_pattern_mismatch\",\"loc\":[\"query\",\"sort\"],\"msg\":\"String should match patte"
   },
   {
@@ -66,7 +66,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 26.66,
+    "elapsed_ms": 15.38,
     "error": null
   },
   {
@@ -76,7 +76,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 853.82,
+    "elapsed_ms": 32.06,
     "error": null
   },
   {
@@ -86,7 +86,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 20.05,
+    "elapsed_ms": 16.81,
     "error": null
   },
   {
@@ -96,7 +96,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 12.69,
+    "elapsed_ms": 12.6,
     "error": null
   },
   {
@@ -106,7 +106,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 17.8,
+    "elapsed_ms": 19.09,
     "error": null
   },
   {
@@ -116,7 +116,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 1655.83,
+    "elapsed_ms": 13.44,
     "error": null
   },
   {
@@ -126,7 +126,7 @@
     "status": 400,
     "expected": 400,
     "passed": true,
-    "elapsed_ms": 25.61,
+    "elapsed_ms": 1.99,
     "error": "{\"detail\":\"Please provide at least 2 GitHub usernames to compare.\"}"
   },
   {
@@ -136,7 +136,7 @@
     "status": 400,
     "expected": 400,
     "passed": true,
-    "elapsed_ms": 15.97,
+    "elapsed_ms": 11.28,
     "error": "{\"detail\":\"A maximum of 4 developers can be compared simultaneously.\"}"
   },
   {
@@ -146,7 +146,7 @@
     "status": 422,
     "expected": 422,
     "passed": true,
-    "elapsed_ms": 27.99,
+    "elapsed_ms": 2.0,
     "error": "{\"detail\":[{\"type\":\"missing\",\"loc\":[\"query\",\"usernames\"],\"msg\":\"Field required\",\"input\":null}]}"
   },
   {
@@ -156,7 +156,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 30.01,
+    "elapsed_ms": 23.88,
     "error": null
   },
   {
@@ -166,7 +166,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 33.26,
+    "elapsed_ms": 38.87,
     "error": null
   },
   {
@@ -176,7 +176,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 21.26,
+    "elapsed_ms": 4.01,
     "error": null
   },
   {
@@ -186,7 +186,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 28.04,
+    "elapsed_ms": 2.02,
     "error": null
   },
   {
@@ -196,38 +196,28 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 24.69,
+    "elapsed_ms": 4.02,
     "error": null
   },
   {
     "name": "Export JSON",
-    "path": "/reports/torvalds/json",
-    "method": "GET",
-    "status": 404,
+    "path": "/reports/export",
+    "method": "POST",
+    "status": 200,
     "expected": 200,
-    "passed": false,
-    "elapsed_ms": 2.34,
-    "error": "{\"detail\":\"Not Found\"}"
+    "passed": true,
+    "elapsed_ms": 4.98,
+    "error": null
   },
   {
     "name": "Export CSV",
-    "path": "/reports/torvalds/csv",
-    "method": "GET",
-    "status": 404,
+    "path": "/reports/export",
+    "method": "POST",
+    "status": 200,
     "expected": 200,
-    "passed": false,
-    "elapsed_ms": 0.5,
-    "error": "{\"detail\":\"Not Found\"}"
-  },
-  {
-    "name": "Export PDF",
-    "path": "/reports/torvalds/pdf",
-    "method": "GET",
-    "status": 404,
-    "expected": 200,
-    "passed": false,
-    "elapsed_ms": 0.0,
-    "error": "{\"detail\":\"Not Found\"}"
+    "passed": true,
+    "elapsed_ms": 4.01,
+    "error": null
   },
   {
     "name": "SQL Injection in Username",
@@ -236,7 +226,7 @@
     "status": 404,
     "expected": 404,
     "passed": true,
-    "elapsed_ms": 647.31,
+    "elapsed_ms": 567.14,
     "error": "{\"detail\":\"Requested GitHub resource '/users/' OR 1=1--' was not found.\"}"
   },
   {
@@ -246,7 +236,7 @@
     "status": 404,
     "expected": 404,
     "passed": true,
-    "elapsed_ms": 25.25,
+    "elapsed_ms": 13.21,
     "error": "{\"detail\":\"Not Found\"}"
   },
   {
@@ -256,7 +246,7 @@
     "status": 200,
     "expected": 200,
     "passed": true,
-    "elapsed_ms": 23.29,
+    "elapsed_ms": 22.43,
     "error": null
   },
   {
@@ -266,7 +256,7 @@
     "status": 404,
     "expected": 404,
     "passed": true,
-    "elapsed_ms": 1.0,
+    "elapsed_ms": 23.8,
     "error": "{\"detail\":\"Not Found\"}"
   }
 ]

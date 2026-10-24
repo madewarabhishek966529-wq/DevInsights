@@ -188,26 +188,34 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ theme, onToggleThe
             </div>
           ) : error ? (
             /* Error State Banner */
-            <div className="py-20 text-center max-w-lg mx-auto">
-              <div className="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center mx-auto mb-4">
-                <AlertCircle className="w-6 h-6" />
+            <div className="py-20 text-center max-w-lg mx-auto px-4">
+              <div className="w-14 h-14 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-rose-500/10">
+                <AlertCircle className="w-7 h-7" />
               </div>
               <h2 className="text-xl font-bold text-white tracking-tight">
                 Unable to Load Developer
               </h2>
-              <p className="text-xs text-slate-400 mt-2 leading-relaxed">
-                {error}
+              <p className="text-sm text-slate-300 mt-2 leading-relaxed">
+                {error === 'Not Found' || error?.includes('404')
+                  ? `GitHub profile for '${cleanUsername}' could not be found. Please check for spelling errors or try a sample profile.`
+                  : error}
               </p>
-              <div className="mt-6 flex items-center justify-center gap-3">
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
                 <button
                   onClick={() => navigate('/')}
-                  className="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-300 hover:text-white"
+                  className="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-300 hover:text-white hover:border-slate-700 transition-all"
                 >
                   Return to Search
                 </button>
                 <button
+                  onClick={() => navigate('/dashboard/torvalds')}
+                  className="px-4 py-2 rounded-xl bg-slate-800 border border-slate-700 text-xs font-semibold text-sky-400 hover:text-sky-300 transition-all"
+                >
+                  Try @torvalds
+                </button>
+                <button
                   onClick={() => loadData(true)}
-                  className="px-4 py-2 rounded-xl bg-sky-500 text-xs font-semibold text-white hover:bg-sky-400"
+                  className="px-4 py-2 rounded-xl bg-sky-500 text-xs font-semibold text-white hover:bg-sky-400 transition-all shadow-md shadow-sky-500/20"
                 >
                   Retry Request
                 </button>

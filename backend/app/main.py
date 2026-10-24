@@ -36,9 +36,9 @@ app.add_middleware(
 
 # Include Routers
 app.include_router(health_router, prefix="/api", tags=["System Health"])
+app.include_router(compare_router, prefix="/api/developers", tags=["Compare"])
 app.include_router(developers_router, prefix="/api/developers", tags=["Developers"])
 app.include_router(repositories_router, prefix="/api/repositories", tags=["Repositories"])
-app.include_router(compare_router, prefix="/api/developers", tags=["Compare"])
 app.include_router(snapshots_router, prefix="/api/snapshots", tags=["Snapshots & Growth"])
 app.include_router(preferences_router, prefix="/api/preferences", tags=["Preferences & Layout"])
 app.include_router(reports_router, prefix="/api/reports", tags=["Reports & Export"])
